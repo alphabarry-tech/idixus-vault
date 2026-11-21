@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/* Palette Idixus : violet #6C5CE7. Les couleurs sont des variables pour basculer en mode sombre. */
+:root {
+	color-scheme: light dark;
+	--bg: #f6f6fb;
+	--surface: #ffffff;
+	--surface-2: #f0effa;
+	--text: #1d1b3a;
+	--muted: #66658a;
+	--line: #e3e2f1;
+	--brand: #6c5ce7;
+	--brand-strong: #5444d4;
+	--brand-soft: #ece9ff;
+	--on-brand: #ffffff;
+	--danger: #c62f40;
+	--danger-soft: #fdebee;
+	--ok: #11794e;
+	--ok-soft: #e3f5ec;
+	--warn: #9a5b00;
+	--warn-soft: #fdf1d6;
+	--shadow: 0 1px 2px rgb(29 27 58 / 0.06), 0 8px 24px rgb(29 27 58 / 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #12111f;
+		--surface: #1b1a2e;
+		--surface-2: #252342;
+		--text: #ecebff;
+		--muted: #a3a2c4;
+		--line: #2f2d50;
+		--brand: #8b7dff;
+		--brand-strong: #a79cff;
+		--brand-soft: #2b2656;
+		--on-brand: #12111f;
+		--danger: #ff7a89;
+		--danger-soft: #3a1c27;
+		--ok: #4fd69c;
+		--ok-soft: #153126;
+		--warn: #f1b44c;
+		--warn-soft: #382a10;
+		--shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+	}
+}
+
+@theme inline {
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-ink: var(--text);
+	--color-muted: var(--muted);
+	--color-line: var(--line);
+	--color-brand: var(--brand);
+	--color-brand-strong: var(--brand-strong);
+	--color-brand-soft: var(--brand-soft);
+	--color-danger: var(--danger);
+	--color-danger-soft: var(--danger-soft);
+	--color-ok: var(--ok);
+	--color-ok-soft: var(--ok-soft);
+	--color-warn: var(--warn);
+	--color-warn-soft: var(--warn-soft);
+	--font-sans:
+		ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	--font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+html {
+	background: var(--bg);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+	outline: 2px solid var(--brand);
+	outline-offset: 2px;
+}
+
+@layer components {
+	.field {
+		width: 100%;
+		background: var(--surface);
+		color: var(--text);
+		border: 1px solid var(--line);
+		border-radius: 0.6rem;
+		padding: 0.6rem 0.8rem;
+		font-size: 0.95rem;
+		line-height: 1.4;
+	}
+	.field:focus {
+		border-color: var(--brand);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent);
+		outline: none;
+	}
+	.field::placeholder {
+		color: var(--muted);
+		opacity: 0.8;
+	}
+	.label {
+		display: block;
+		font-size: 0.82rem;
+		font-weight: 600;
+		margin-bottom: 0.3rem;
+		color: var(--text);
+	}
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.45rem;
+		font-weight: 600;
+		font-size: 0.92rem;
+		border-radius: 0.6rem;
+		padding: 0.55rem 0.95rem;
+		border: 1px solid var(--line);
+		background: var(--surface);
+		color: var(--text);
+		cursor: pointer;
+		transition:
+			background 0.12s,
+			border-color 0.12s,
+			opacity 0.12s;
+	}
+	.btn:hover:not(:disabled) {
+		background: var(--surface-2);
+	}
+	.btn:disabled {
+		opacity: 0.55;
+		cursor: not-allowed;
+	}
+	.btn-primary {
+		background: var(--brand);
+		border-color: var(--brand);
+		color: var(--on-brand);
+	}
+	.btn-primary:hover:not(:disabled) {
+		background: var(--brand-strong);
+		border-color: var(--brand-strong);
+	}
+	.btn-danger {
+		color: var(--danger);
+		border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+	}
+	.btn-danger:hover:not(:disabled) {
+		background: var(--danger-soft);
+	}
+	.btn-ghost {
+		border-color: transparent;
+		background: transparent;
+	}
+	.btn-icon {
+		padding: 0.45rem;
+	}
+	.card {
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: 0.9rem;
+	}
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 0.72rem;
+		font-weight: 600;
+		border-radius: 999px;
+		padding: 0.12rem 0.55rem;
+		background: var(--surface-2);
+		color: var(--muted);
+	}
+	.badge-ok {
+		background: var(--ok-soft);
+		color: var(--ok);
+	}
+	.badge-warn {
+		background: var(--warn-soft);
+		color: var(--warn);
+	}
+	.badge-danger {
+		background: var(--danger-soft);
+		color: var(--danger);
+	}
+	.alert {
+		border-radius: 0.6rem;
+		padding: 0.65rem 0.85rem;
+		font-size: 0.88rem;
+	}
+	.alert-danger {
+		background: var(--danger-soft);
+		color: var(--danger);
+	}
+	.alert-warn {
+		background: var(--warn-soft);
+		color: var(--warn);
+	}
+	.alert-ok {
+		background: var(--ok-soft);
+		color: var(--ok);
+	}
+}
+
+dialog::backdrop {
+	background: rgb(10 8 30 / 0.55);
+	backdrop-filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none !important;
+		animation: none !important;
+	}
+}
